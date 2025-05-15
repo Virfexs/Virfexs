@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Virfexs</title>
+  <link rel="icon" href="Virfexs.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Palette & Glassmorphism */
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-neon: rgba(10, 10, 15, 0.6);
+      --neon-cyan: #00f0ff;
+      --neon-magenta: #ff00f6;
+      --text-light: #f0f0f5;
+      --panel-bg: rgba(255, 255, 255, 0.05);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --shadow-neon: rgba(0, 240, 255, 0.4);
+    }
+
+    /* Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Orbitron", "Segoe UI", sans-serif;
+      background: #0a0a0f url('https://www.transparenttextures.com/patterns/cubes.png');
+      color: var(--text-light);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+      animation: pulseBg 20s linear infinite;
+    }
+    @keyframes pulseBg {
+      0%, 100% { background-position: 0 0; }
+      50% { background-position: 200px 200px; }
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background: var(--bg-neon);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      padding: 40px 0;
+      border-right: 1px solid var(--panel-border);
+    }
+    .sidebar .logo {
+      text-align: center;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan);
+    }
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      margin: 4px 0;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.2s;
+      font-weight: 600;
+    }
+    .sidebar nav a:hover {
+      background: var(--neon-cyan);
+      color: #0a0a0f;
+      transform: translateX(6px);
+      box-shadow: 0 0 12px var(--shadow-neon);
+    }
+    .sidebar nav i {
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Main Container */
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      backdrop-filter: blur(8px);
+      background: var(--bg-neon);
+      border-bottom: 1px solid var(--panel-border);
+    }
+    header .brand {
+      font-size: 1.4rem;
+      color: var(--neon-magenta);
+      text-shadow: 0 0 8px var(--neon-magenta);
+    }
+    header .search {
+      flex: 1;
+      max-width: 360px;
+      margin: 0 24px;
+    }
+    header .search input {
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px;
+      background: var(--panel-bg);
+      color: var(--text-light);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--panel-border);
+    }
+    header .actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    /* Icon-only buttons */
+    header .actions button {
+      background: var(--bg-neon);
+      border: 1px solid var(--panel-border);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--shadow-neon);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    header .actions button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px var(--neon-cyan);
+    }
+
+    /* Settings dropdown */
+    .settings-menu {
+      display: none;
+      position: absolute;
+      top: 46px;
+      right: 0;
+      background: var(--bg-neon);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px var(--shadow-neon);
+      z-index: 1000;
+    }
+    .settings-menu.active {
+      display: block;
+    }
+    .settings-menu a {
+      display: block;
+      padding: 10px 16px;
+      color: var(--text-light);
+      transition: background 0.2s;
+    }
+    .settings-menu a:hover {
+      background: var(--neon-cyan);
+      color: #0a0a0f;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 24px;
+      backdrop-filter: blur(8px);
+      background: rgba(20, 20, 30, 0.6);
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 12px var(--neon-cyan);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+
+    /* Cards Grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      padding: 24px;
+    }
+    .card {
+      background: var(--bg-neon);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px var(--shadow-neon);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+      mix-blend-mode: multiply;
+    }
+    .card-content {
+      padding: 16px;
+      color: var(--text-light);
+    }
+    .card-content h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      color: var(--neon-magenta);
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 16px;
+      background: var(--bg-neon);
+      color: var(--text-light);
+      border-top: 1px solid var(--panel-border);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        flex-direction: row;
+        padding: 12px;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      header .search {
+        margin: 12px 0;
+      }
+      .hero {
+        padding: 60px 16px;
+      }
+      .cards {
+        padding: 16px;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">Virfexs</div>
+    <nav>
+      <a href="#"><i class="fas fa-home"></i> Home</a>
+      <a href="#"><i class="fas fa-video"></i> Videos</a>
+      <a href="#"><i class="fas fa-book-open"></i> Stories</a>
+      <a href="#"><i class="fas fa-info-circle"></i> About</a>
+    </nav>
+  </aside>
+
+  <!-- Main Container -->
+  <div class="container">
+    <header>
+      <div class="brand">
+        <i class="fas fa-feather-alt"></i> Home
+      </div>
+
+      <div class="search">
+        <input type="search" placeholder="Search..." />
+      </div>
+
+      <div class="actions">
+        <!-- icon buttons -->
+        <button><i class="fas fa-home"></i></button>
+        <button><i class="fas fa-shopping-cart"></i></button>
+        <button id="settingsBtn"><i class="fas fa-cog"></i></button>
+
+        <!-- Settings dropdown -->
+        <div class="settings-menu" id="settingsMenu">
+          <a href="#">Profile</a>
+          <a href="#">Account</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Welcome</h1>
+      <p>This is a place where you can find our Community.</p>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x200/ff00ff/000000?text=Video" alt="Video">
+        <div class="card-content">
+          <h3>Holo-Video</h3>
+          <p>Immersive 3D storytelling like never before.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x200/00ffff/000000?text=Story" alt="Story">
+        <div class="card-content">
+          <h3>Neon Stories</h3>
+          <p>Interactive narratives in a hyperconnected world.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x200/ff0066/000000?text=Community" alt="Community">
+        <div class="card-content">
+          <h3>Future Hub</h3>
+          <p>Join a global network of forward-thinkers.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2025 Virfexs • All rights reserved</footer>
+  </div>
+
+  <script>
+    // Settings dropdown toggle
+    const btn = document.getElementById('settingsBtn');
+    const menu = document.getElementById('settingsMenu');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      menu.classList.toggle('active');
+    });
+    document.addEventListener('click', () => menu.classList.remove('active'));
+  </script>
+</body>
+</html>
