@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Virfexs</title>
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
@@ -19,7 +19,6 @@
       --panel-border: rgba(255, 255, 255, 0.12);
       --shadow-neon: rgba(0, 240, 255, 0.4);
     }
-
     /* Base */
     * {
       box-sizing: border-box;
@@ -36,14 +35,17 @@
       animation: pulseBg 20s linear infinite;
     }
     @keyframes pulseBg {
-      0%, 100% { background-position: 0 0; }
-      50% { background-position: 200px 200px; }
+      0%, 100% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: 200px 200px;
+      }
     }
     a {
       color: inherit;
       text-decoration: none;
     }
-
     /* Sidebar */
     .sidebar {
       width: 200px;
@@ -82,7 +84,6 @@
       width: 20px;
       text-align: center;
     }
-
     /* ACTIVE sidebar link style */
     .sidebar nav a.active {
       background: var(--neon-cyan);
@@ -90,14 +91,12 @@
       box-shadow: 0 0 12px var(--shadow-neon);
       transform: translateX(6px);
     }
-
     /* Main Container */
     .container {
       flex: 1;
       display: flex;
       flex-direction: column;
     }
-
     /* Topbar */
     header {
       position: relative;
@@ -154,7 +153,6 @@
       transform: scale(1.1);
       box-shadow: 0 0 12px var(--neon-cyan);
     }
-
     /* Settings dropdown */
     .settings-menu {
       display: none;
@@ -181,7 +179,6 @@
       background: var(--neon-cyan);
       color: #0a0a0a;
     }
-
     /* Hero */
     .hero {
       text-align: center;
@@ -201,7 +198,6 @@
       margin-bottom: 24px;
       opacity: 0.8;
     }
-
     /* Cards Grid */
     .cards {
       display: grid;
@@ -239,7 +235,6 @@
       font-size: 0.9rem;
       opacity: 0.9;
     }
-
     /* Footer */
     footer {
       margin-top: auto;
@@ -249,7 +244,6 @@
       color: var(--text-light);
       border-top: 1px solid var(--panel-border);
     }
-
     /* Responsive */
     @media (max-width: 768px) {
       .sidebar {
@@ -285,7 +279,6 @@
       <a href="VideosPage.html"><i class="fas fa-video"></i> Videos</a>
       <a href="StoriesPage.html"><i class="fas fa-book-open"></i> Stories</a>
       <a href="AboutPage.html" class="active"><i class="fas fa-info-circle"></i> About</a>
-
     </nav>
   </aside>
 
@@ -322,21 +315,21 @@
 
     <section class="cards">
       <div class="card">
-        <img src="https://via.placeholder.com/400x200/ff00ff/000000?text=Video" alt="Video">
+        <img src="https://via.placeholder.com/400x200/ff00ff/000000?text=Video" alt="Video" />
         <div class="card-content">
           <h3>Holo-Video</h3>
           <p>Immersive 3D storytelling like never before.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://via.placeholder.com/400x200/00ffff/000000?text=Story" alt="Story">
+        <img src="https://via.placeholder.com/400x200/00ffff/000000?text=Story" alt="Story" />
         <div class="card-content">
           <h3>Neon Stories</h3>
           <p>Interactive narratives in a hyperconnected world.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://via.placeholder.com/400x200/ff0066/000000?text=Community" alt="Community">
+        <img src="https://via.placeholder.com/400x200/ff0066/000000?text=Community" alt="Community" />
         <div class="card-content">
           <h3>Future Hub</h3>
           <p>Join a global network of forward-thinkers.</p>
@@ -348,22 +341,29 @@
   </div>
 
   <script>
-    // Settings dropdown toggle
-    const btn = document.getElementById('settingsBtn');
-    const menu = document.getElementById('settingsMenu');
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      menu.classList.toggle('active');
-    });
-    document.addEventListener('click', () => menu.classList.remove('active'));
+    document.addEventListener("DOMContentLoaded", function () {
+      // Change topbar brand text from "Home" to "About"
+      const brand = document.querySelector("header .brand");
+      if (brand) {
+        brand.innerHTML = `<i class="fas fa-feather-alt"></i> About`;
+      }
 
-    // Highlight "Home" in sidebar (already done via class="active" in HTML),
-    // but if you want to ensure only one active link at a time or extend functionality:
-    const sidebarLinks = document.querySelectorAll('.sidebar nav a');
-    sidebarLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        sidebarLinks.forEach(l => l.classList.remove('active'));
-        e.currentTarget.classList.add('active');
+      // Settings dropdown toggle
+      const btn = document.getElementById('settingsBtn');
+      const menu = document.getElementById('settingsMenu');
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        menu.classList.toggle('active');
+      });
+      document.addEventListener('click', () => menu.classList.remove('active'));
+
+      // Sidebar active link handling
+      const sidebarLinks = document.querySelectorAll('.sidebar nav a');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          sidebarLinks.forEach(l => l.classList.remove('active'));
+          e.currentTarget.classList.add('active');
+        });
       });
     });
   </script>
