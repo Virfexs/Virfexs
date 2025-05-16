@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Virfexs</title>
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Virfexs - Home</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
@@ -36,8 +36,12 @@
       animation: pulseBg 20s linear infinite;
     }
     @keyframes pulseBg {
-      0%, 100% { background-position: 0 0; }
-      50% { background-position: 200px 200px; }
+      0%, 100% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: 200px 200px;
+      }
     }
     a {
       color: inherit;
@@ -281,10 +285,10 @@
   <aside class="sidebar">
     <div class="logo">Virfexs</div>
     <nav>
-      <a href="HomePage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="Index.html" class="active"><i class="fas fa-home"></i> Home</a>
       <a href="VideosPage.html"><i class="fas fa-video"></i> Videos</a>
       <a href="StoriesPage.html"><i class="fas fa-book-open"></i> Stories</a>
-      <a href="AboutPage.html" class="active"><i class="fas fa-info-circle"></i> About</a>
+      <a href="AboutPage.html"><i class="fas fa-info-circle"></i> About</a>
     </nav>
   </aside>
 
@@ -321,21 +325,21 @@
 
     <section class="cards">
       <div class="card">
-        <img src="https://via.placeholder.com/400x200/ff00ff/000000?text=Video" alt="Video">
+        <img src="https://via.placeholder.com/400x200/ff00ff/000000?text=Video" alt="Video" />
         <div class="card-content">
           <h3>Holo-Video</h3>
           <p>Immersive 3D storytelling like never before.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://via.placeholder.com/400x200/00ffff/000000?text=Story" alt="Story">
+        <img src="https://via.placeholder.com/400x200/00ffff/000000?text=Story" alt="Story" />
         <div class="card-content">
           <h3>Neon Stories</h3>
           <p>Interactive narratives in a hyperconnected world.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://via.placeholder.com/400x200/ff0066/000000?text=Community" alt="Community">
+        <img src="https://via.placeholder.com/400x200/ff0066/000000?text=Community" alt="Community" />
         <div class="card-content">
           <h3>Future Hub</h3>
           <p>Join a global network of forward-thinkers.</p>
@@ -356,8 +360,8 @@
     });
     document.addEventListener('click', () => menu.classList.remove('active'));
 
-    // Highlight "Home" in sidebar (already done via class="active" in HTML),
-    // but if you want to ensure only one active link at a time or extend functionality:
+    // Highlight "Home" in sidebar (already set with class="active" in HTML),
+    // but added click handler to switch active link on click
     const sidebarLinks = document.querySelectorAll('.sidebar nav a');
     sidebarLinks.forEach(link => {
       link.addEventListener('click', (e) => {
