@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Virfexs</title>
+  <title>About | Virfexs</title>
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
@@ -197,43 +197,29 @@
       font-size: 1.2rem;
       margin-bottom: 24px;
       opacity: 0.8;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    /* Cards Grid */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
-      padding: 24px;
-    }
-    .card {
-      background: var(--bg-neon);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--panel-border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px var(--shadow-neon);
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-    }
-    .card img {
-      width: 100%;
-      display: block;
-      mix-blend-mode: multiply;
-    }
-    .card-content {
-      padding: 16px;
-      color: var(--text-light);
-    }
-    .card-content h3 {
-      margin-bottom: 8px;
+    /* About Content */
+    .about-content {
+      padding: 24px 40px;
+      max-width: 900px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
       font-size: 1.1rem;
-      color: var(--neon-magenta);
+      color: var(--text-light);
+      background: var(--bg-neon);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px var(--shadow-neon);
+      border: 1px solid var(--panel-border);
     }
-    .card-content p {
-      font-size: 0.9rem;
-      opacity: 0.9;
+    .about-content h2 {
+      color: var(--neon-magenta);
+      margin-bottom: 16px;
+      text-align: center;
+      text-shadow: 0 0 8px var(--neon-magenta);
     }
     /* Footer */
     footer {
@@ -262,9 +248,8 @@
       .hero {
         padding: 60px 16px;
       }
-      .cards {
-        padding: 16px;
-        gap: 16px;
+      .about-content {
+        padding: 16px 20px;
       }
     }
   </style>
@@ -286,7 +271,7 @@
   <div class="container">
     <header>
       <div class="brand">
-        <i class="fas fa-feather-alt"></i> Home
+        <i class="fas fa-feather-alt"></i> About
       </div>
 
       <div class="search">
@@ -309,32 +294,26 @@
     </header>
 
     <section class="hero">
-      <h1>Welcome</h1>
-      <p>This is a place where you can find our Community.</p>
+      <h1>About Virfexs</h1>
+      <p>Discover who we are, what we do, and our vision for the future of immersive media.</p>
     </section>
 
-    <section class="cards">
-      <div class="card">
-        <img src="https://via.placeholder.com/400x200/ff00ff/000000?text=Video" alt="Video" />
-        <div class="card-content">
-          <h3>Holo-Video</h3>
-          <p>Immersive 3D storytelling like never before.</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x200/00ffff/000000?text=Story" alt="Story" />
-        <div class="card-content">
-          <h3>Neon Stories</h3>
-          <p>Interactive narratives in a hyperconnected world.</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x200/ff0066/000000?text=Community" alt="Community" />
-        <div class="card-content">
-          <h3>Future Hub</h3>
-          <p>Join a global network of forward-thinkers.</p>
-        </div>
-      </div>
+    <section class="about-content">
+      <h2>Our Story</h2>
+      <p>
+        Virfexs started as a passion project to revolutionize how people experience digital content. 
+        We believe in the power of immersive technology to connect communities and tell stories in bold new ways.
+      </p>
+
+      <h2>Our Mission</h2>
+      <p>
+        To provide cutting-edge platforms that blend video, storytelling, and community engagement through sleek, futuristic designs and intuitive interfaces.
+      </p>
+
+      <h2>Join Us</h2>
+      <p>
+        We invite creators, innovators, and dreamers to join our global network. Together, we can shape the future and inspire new generations.
+      </p>
     </section>
 
     <footer>© 2025 Virfexs • All rights reserved</footer>
@@ -342,12 +321,6 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Change topbar brand text from "Home" to "About"
-      const brand = document.querySelector("header .brand");
-      if (brand) {
-        brand.innerHTML = `<i class="fas fa-feather-alt"></i> About`;
-      }
-
       // Settings dropdown toggle
       const btn = document.getElementById('settingsBtn');
       const menu = document.getElementById('settingsMenu');
