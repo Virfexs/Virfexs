@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Virfexs Stories</title>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #121821;
+      margin: 0;
+      padding: 40px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #cfd8dc;
+      position: relative;
+      min-height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 900px;
+      background: #1e293b;
+      padding: 40px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    #page-content {
+      text-align: justify;
+      font-size: 20px;
+      line-height: 1.8;
+      opacity: 0;
+      transform: rotateY(90deg);
+      animation: flipIn 0.6s ease-out forwards;
+      color: #e1e8f0;
+      white-space: pre-line;
+    }
+    @keyframes flipIn {
+      to {
+        transform: rotateY(0);
+        opacity: 1;
+      }
+    }
+    .navigation {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 12px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #3b82f6;
+      color: white;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    button:hover:not(:disabled) {
+      background-color: #2563eb;
+    }
+    button:disabled {
+      background-color: #555e6c;
+      cursor: default;
+      color: #999;
+    }
+    .page-number {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #94a3b8;
+    }
+    .web-icon-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+    .web-icon-link:hover {
+      transform: scale(1.1);
+    }
+    .hidden {
+      display: none;
+    }
+    #more-books-list {
+      color: #e1e8f0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    #more-books-list ul {
+      padding-left: 20px;
+    }
+    #more-books-list li {
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: #3b82f6;
+      text-decoration: underline;
+      display: flex;
+      align-items: center;
+    }
+    #more-books-list li:hover {
+      color: #2563eb;
+    }
+    #more-books-list svg {
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
+    #back-to-story {
+      margin-top: 30px;
+      background-color: #f97316;
+    }
+    #back-to-story:hover {
+      background-color: #ea580c;
+    }
+
+    /* Modal styles */
+    #popup-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    #popup-modal.active {
+      display: flex;
+    }
+    #popup-modal .modal-content {
+      background-color: #1e293b;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      text-align: center;
+      color: #e1e8f0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+  <a href="#" class="web-icon-link" title="See more books" id="toggle-view">
+    <svg viewBox="0 0 64 64" class="web-icon">
+      <circle cx="32" cy="32" r="30" fill="#121821" stroke="#ffffff"/>
+      <path d="M20 24 L32 40 L44 24" stroke="#ffffff" />
+      <circle cx="32" cy="32" r="6" fill="#ffffff" />
+    </svg>
+  </a>
+
+  <div id="story-section" class="container">
+    <div id="page-content"></div>
+    <div class="page-number" id="page-number"></div>
+    <div class="navigation">
+      <button id="prev" onclick="changePage(-1)">Back</button>
+      <button id="next" onclick="changePage(1)">Next</button>
+    </div>
+  </div>
+
+  <div id="more-books-section" class="container hidden">
+    <h2>More Books to Read</h2>
+    <div id="more-books-list">
+      <ul>
+        <li onclick="showPopup('Coming this June 23rd, 2025!')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M20 2H6.5A2.5 2.5 0 0 0 4 4.5v15"></path>
+            <line x1="2" y1="2" x2="20" y2="2"></line>
+          </svg>
+          Book 2: Virfexs - The Hidden Island
+        </li>
+        <li onclick="showPopup('Coming soon!')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M20 2H6.5A2.5 2.5 0 0 0 4 4.5v15"></path>
+            <line x1="2" y1="2" x2="20" y2="2"></line>
+          </svg>
+          Book 3: Virfexs - The Forgotten City
+        </li>
+        <li onclick="showPopup('Coming soon!')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M20 2H6.5A2.5 2.5 0 0 0 4 4.5v15"></path>
+            <line x1="2" y1="2" x2="20" y2="2"></line>
+          </svg>
+          Book 4: Virfexs and the Rise of a New Town
+        </li>
+        <li onclick="showPopup('Coming soon!')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M20 2H6.5A2.5 2.5 0 0 0 4 4.5v15"></path>
+            <line x1="2" y1="2" x2="20" y2="2"></line>
+          </svg>
+          Book 5: Virfexs - Secrets of the Lost Island
+        </li>
+      </ul>
+    </div>
+    <button id="back-to-story">Back to Story</button>
+  </div>
+
+  <!-- Modal Popup -->
+  <div id="popup-modal">
+    <div class="modal-content">
+      <p id="popup-message"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+<script>
+  const pages = [
+    `<div style="text-align:center; padding-top: 100px;">
+      <h1 style="font-size: 48px; margin-bottom: 20px; color: #f97316;">Virfexs Lost World!</h1>
+      <h2 style="font-size: 24px; font-weight: normal; color: #94a3b8;">How did Vir find the town called Virfexs?</h2>
+    </div>`,
+
+    `Chapter 1
+A long time ago, in the early 1980s, there was a village called Lost World. It wasn’t well known back then because it was a small town located inside a mountain — a volcano, to be exact.`,
+
+    `Hey there, my name is Vir, but people always call me Virfexs. I don’t really know why. The town was lost back in 2011 after the volcano became active again. That’s why everyone left. If I owned that town, I’d move it to a safer location — not near a volcano.`,
+
+    `If I ever find the hidden town, I’ll give it a better name and invest $10 million to move and rebuild it. I’d add new buildings and turn it into a beautiful place for people to visit or even live in. The problem is that the current owner lives in New Zealand. He left the town before 2005, and I don’t have the money to fly there.`,
+
+    `But I really want to go to New Zealand to find the manor who used to run Lost World Village. The flight alone costs around $600. Luckily, I met Jake, who used to work at a café in the village back in 2004. The café closed before the volcano erupted, and Jake said he doesn’t remember exactly where the town was.`,
+
+    `We did find some photos of the town in a museum located in Town Wood, a beachside town. Town Wood had been closed for a few months while they upgraded the roads and rebuilt parts of the town. They tore down the older buildings and made them new again.`,
+
+    `Town Wood’s reconstruction cost about $4 million after it was hit by floods in 2020 and fires in 2018. Many of the original buildings from the 1950s were destroyed. People lost everything, but nearby towns helped them rebuild. In total, around $40 million was spent on repairs, power, roads, and homes. As a bonus, renters were allowed to own their new homes for free through a government program.`,
+
+    `Chapter 2
+Back in 2001, Town Wood was again damaged by floods and fires. Over 3,000 nearby towns were also affected. But I stayed focused on Lost World. I called 43 people across New Zealand trying to track down the town’s original owner.`,
+
+    `Eventually, I met someone named Ryan. He told me the manor was not only an owner but also a secret protector of the Lost World. Ryan shared a story about a mysterious map hidden in the manor's attic, which could lead to the town’s new location.`,
+
+    `We planned to visit New Zealand, but the pandemic hit, and all flights were canceled. Then, Jake found a hidden box in the café ruins with a cryptic note written by the manor. The note mentioned the volcano’s last eruption and a safe zone nearby.`,
+
+    `This discovery gave us hope. We realized that the Lost World might be rebuilt if we could find that safe zone. So, we gathered a small team and prepared for an expedition once travel resumed.`,
+
+    `Chapter 3
+Our journey started with a long flight to New Zealand. From there, we took a bus to the mountain’s base. The locals were friendly but wary about Lost World. Some warned us to stay away from the volcano, while others shared stories of strange lights and sounds.`,
+
+    `At the foot of the volcano, we found remnants of the old village: broken signs, scattered belongings, and the café’s rusted remains. We mapped the area and compared it with the old photographs Jake had taken.`,
+
+    `One night, under a bright full moon, we discovered an entrance partially covered by rocks. It led to a hidden tunnel system. Inside, the walls were etched with symbols matching those on the cryptic note.`,
+
+    `Following the tunnel, we reached an underground chamber with artifacts and a map carved in stone. This was the manor’s secret — a plan to move the village underground to avoid volcanic danger.`,
+
+    `Inspired by this, we began planning how to rebuild Virfexs Lost World using modern technology and respect for nature. The adventure was just beginning.`,
+
+    `THE END - For now...
+Thank you for reading. Keep an eye out for the next book in the Virfexs series!`
+  ];
+
+  let currentPage = 0;
+
+  const pageContent = document.getElementById('page-content');
+  const pageNumber = document.getElementById('page-number');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const storySection = document.getElementById('story-section');
+  const moreBooksSection = document.getElementById('more-books-section');
+  const toggleViewBtn = document.getElementById('toggle-view');
+  const backToStoryBtn = document.getElementById('back-to-story');
+  const popupModal = document.getElementById('popup-modal');
+  const popupMessage = document.getElementById('popup-message');
+
+  function renderPage() {
+    pageContent.style.animation = 'none'; // reset animation
+    void pageContent.offsetWidth; // trigger reflow
+    pageContent.style.animation = null; // restore animation
+
+    pageContent.innerHTML = pages[currentPage];
+    pageNumber.textContent = `Page ${currentPage + 1} / ${pages.length}`;
+
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage === pages.length - 1;
+  }
+
+  function changePage(offset) {
+    if (currentPage + offset < 0 || currentPage + offset >= pages.length) return;
+    currentPage += offset;
+    renderPage();
+  }
+
+  toggleViewBtn.addEventListener('click', e => {
+    e.preventDefault();
+    if (storySection.classList.contains('hidden')) {
+      storySection.classList.remove('hidden');
+      moreBooksSection.classList.add('hidden');
+      toggleViewBtn.title = 'See more books';
+    } else {
+      storySection.classList.add('hidden');
+      moreBooksSection.classList.remove('hidden');
+      toggleViewBtn.title = 'Back to story';
+    }
+  });
+
+  backToStoryBtn.addEventListener('click', () => {
+    storySection.classList.remove('hidden');
+    moreBooksSection.classList.add('hidden');
+    toggleViewBtn.title = 'See more books';
+  });
+
+  function showPopup(message) {
+    popupMessage.textContent = message;
+    popupModal.classList.add('active');
+  }
+
+  function closePopup() {
+    popupModal.classList.remove('active');
+  }
+
+  // Initial render
+  renderPage();
+</script>
+</body>
+</html>
 
